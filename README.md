@@ -5,7 +5,7 @@ Allows admins to change a users password manually without the need to send an em
 
 ## How it works?
 
-When this addon is activated, administrators get the ability to change individual user passwords without the need to sent a password reset email to the client. You can generate a password or enter one of your choosing.
+When this addon is activated, administrators get the ability to change individual user passwords without the need to send a password reset email to the client. You can generate a password or enter one of your choosing.
 
 There are a number of configuration optons available, please see the Configuration heading below.
 
