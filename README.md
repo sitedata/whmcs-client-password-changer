@@ -1,4 +1,4 @@
-Psst... If you would like to support my work or are just pure sound, you can (https://www.buymeacoffee.com/leemahoney3)[buy me a coffee ☕]!
+Psst... If you would like to support my work or are just pure sound, you can [Buy me a coffee ☕](https://www.buymeacoffee.com/leemahoney3)!
 
 # WHMCS Client Password Changer
 
