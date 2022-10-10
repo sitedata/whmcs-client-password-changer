@@ -4,6 +4,7 @@ namespace LMTech\ClientPassword\Admin;
 
 use WHMCS\User\User;
 use WHMCS\Database\Capsule;
+use WHMCS\Authentication\CurrentUser;
 use LMTech\ClientPassword\Config\Config;
 use LMTech\ClientPassword\Helpers\RedirectHelper;
 use LMTech\ClientPassword\Helpers\AdminPageHelper;
@@ -19,7 +20,7 @@ use LMTech\ClientPassword\Helpers\PaginationHelper;
  * @author     Lee Mahoney <lee@leemahoney.dev>
  * @copyright  Copyright (c) Lee Mahoney 2022
  * @license    MIT License
- * @version    1.0.0
+ * @version    1.0.2
  * @link       https://leemahoney.dev
  */
 
@@ -44,7 +45,7 @@ class Admin {
 
             if (isset($_POST['search']) && !empty($_POST['search'])) {
 
-                $query = htmlentities($_POST['search']);
+                $query = stripslashes($_POST['search']);
                 $where = [
                     [Capsule::raw('concat(`first_name`, " ", `last_name`)'), 'like', '%' . $query . '%'],
                     ['email', 'like', '%' . $query . '%'],
@@ -112,6 +113,88 @@ class Admin {
                     }
                 </script>
             ';
+
+        }
+
+        if (AdminPageHelper::getCurrentPage() == 'data') {
+
+            if (!Config::get('showModal')) {
+                die(json_encode([
+                    'status'    => 'error',
+                    'data'      => 'This module function is not enabled.',
+                ]));
+            }
+
+            $currentUser = new CurrentUser;
+
+            # Just incase...
+            if ($currentUser->admin()) {
+                if (!in_array($currentUser->admin()->roleid, explode(',', Config::get('access')))) {
+                    die(json_encode([
+                        'status' => 'error', 
+                        'data' => 'Your operator role does not have access to this function.'
+                    ]));
+                }
+            }
+
+            if (!isset($_POST) || empty($_POST)) {
+                exit('This page cannot be accessed directly.');
+            }
+            
+            switch ($_POST['action']) {
+                
+                case 'grab':
+
+                    $userID = (int) trim($_POST['user']);
+                    $user   = User::select('first_name', 'last_name', 'email')->where('id', $userID)->first();
+
+                    die(json_encode([
+                        'status'        => 'success',
+                        'data'          => [
+                            'fullName'  => $user->first_name . ' ' . $user->last_name,
+                            'email'     => $user->email,
+                        ],
+                    ]));
+
+                    break;
+
+                case 'change':
+
+                    $userID     = (int) trim($_POST['user']);
+                    $password   = trim(stripslashes(html_entity_decode($_POST['pw'])));
+                    $user       = User::where('id', $userID)->first();
+
+                    if (empty($password)) {
+                        $data = [
+                            'status'    => 'error',
+                            'data'      => 'Please enter a password',
+                        ];
+                    } else if (empty($userID)) {
+                        $data = [
+                            'status'    => 'error',
+                            'data'      => 'Invalid user ID provided',
+                        ];
+                    } else {
+
+                        User::where('id', $user->id)->first()->updatePassword($password);
+
+                        if (Config::get('enableLogging')) {
+                            foreach ($user->ownedClients() as $client) {
+                                logActivity("User password manually changed by admin (User ID: {$user->id})", $client->id);
+                            }
+                        }
+
+                        $data = [
+                            'status'    => 'success',
+                            'data'      => "The password has been updated for user: <b>{$user->first_name} {$user->last_name} ({$user->email})</b>"
+                        ];
+                    }
+
+                    die(json_encode($data));
+
+                    break;
+            
+            }
 
         }
 

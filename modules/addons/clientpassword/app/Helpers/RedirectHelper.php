@@ -12,7 +12,7 @@ namespace LMTech\ClientPassword\Helpers;
  * @author     Lee Mahoney <lee@leemahoney.dev>
  * @copyright  Copyright (c) Lee Mahoney 2022
  * @license    MIT License
- * @version    1.0.0
+ * @version    1.0.2
  * @link       https://leemahoney.dev
  */
 
@@ -29,7 +29,7 @@ class RedirectHelper {
 
     public static function page($page, $args = []) {
 
-        $url = "addonmodules.php?module=clientpassword&page={$page}";
+        $url = "/" . $GLOBALS['customadminpath'] . "/addonmodules.php?module=clientpassword&page={$page}";
 
         if (!empty($args)) {
             foreach ($args as $arg => $value) {

@@ -1,4 +1,11 @@
+Psst... If you would like to support my work or are just pure sound, you can [Buy me a coffee ☕](https://www.buymeacoffee.com/leemahoney3)!
+
 # WHMCS Client Password Changer
+
+### Version 1.0.2 is now available
+Cleaned up some code and added modal functionality to update passwords without leaving the current page.
+
+---
 
 ## What is this?
 Allows admins to change a users password manually without the need to send an email to the client and reset it that way.
@@ -41,6 +48,13 @@ There are a number of configuration options available when activating the addon.
 Configuration Options
 ![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im001.png)
 
+Change Password Modal
+![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im006.png)
+
+![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im007.png)
+
+![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im008.png)
+
 Dashboard
 ![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im002.png)
 
@@ -51,6 +65,9 @@ Change Password Buttons
 ![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im004.png)
 
 ![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im005.png)
+
+Password Changes Logged
+![WHMCS Client Password Changer](https://static.leemahoney.tech/img/whmcs/addons/whmcs-client-password-changer/im009.png)
 
 ## Have a feature request?
 

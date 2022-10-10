@@ -37,10 +37,10 @@
         {/if}
 
         <div class="row">
-            <div class="col-md-8 col-lg-10">
+            <div class="col-md-8 col-lg-8">
                 Please choose a user from the list below.
             </div>
-            <div class="col-md-4 col-lg-2">
+            <div class="col-md-4 col-lg-4">
                 <form action="" method="post">
                     <div class="input-group">
                         <input type="text" placeholder="Search by users name..." class="form-control" name="search" class="pull-right">

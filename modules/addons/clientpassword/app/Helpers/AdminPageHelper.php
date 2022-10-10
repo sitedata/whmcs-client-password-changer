@@ -16,7 +16,7 @@ use LMTech\ClientPassword\Helpers\TemplateHelper;
  * @author     Lee Mahoney <lee@leemahoney.dev>
  * @copyright  Copyright (c) Lee Mahoney 2022
  * @license    MIT License
- * @version    1.0.0
+ * @version    1.0.2
  * @link       https://leemahoney.dev
  */
 
@@ -34,6 +34,10 @@ class AdminPageHelper {
         [
             'name' => 'Change Password',
             'slug' => 'change',
+        ],
+        [
+            'name' => 'Data Output',
+            'slug' => 'data',
         ],
     ];
 
