@@ -15,7 +15,7 @@ use LMTech\ClientPassword\Config\Config;
  * @author     Lee Mahoney <lee@leemahoney.dev>
  * @copyright  Copyright (c) Lee Mahoney 2022
  * @license    MIT License
- * @version    1.0.2
+ * @version    1.0.3
  * @link       https://leemahoney.dev
  */
 
@@ -60,14 +60,13 @@ class PaginationHelper {
         $this->page         = (int) (AdminPageHelper::getAttribute($this->pageName) != null) ? AdminPageHelper::getAttribute($this->pageName) : 1;
 
         $this->offset       = ($this->page - 1) * $this->limit;
-
         $this->sort         = $sort;
 
     }
 
     public function data() {
 
-        $result = $this->model::offset($offset)->limit($this->limit);
+        $result = $this->model::offset($this->offset)->limit($this->limit);
 
         if (!empty($this->whereOrArray)) {
 
@@ -114,6 +113,12 @@ class PaginationHelper {
                     <div class="text-sm-left float-left pull-left">Showing <b>' . $this->offset . '</b> to <b>' . ($this->page * $this->limit) . '</b> out of <b>' . $this->recordCount . '</b> records</div>
                     <ul style="margin: 0px 0px" class="pagination float-right pull-right">
             ';
+
+            if($this->page == 1) {
+                $html .= '<li class="page-item disabled"><a href="#" class="page-link">&laquo;</a></li>';
+            } else {
+                $html .= '<li class="page-item"><a href="' . $this->parseURL($this->pageName, 1) . '" class="page-link">&laquo;</a></li>';
+            }
             
             if ($this->page < 2) {
                 $html .= '<li class="page-item disabled"><a href="#" class="page-link">Previous</a></li>';
@@ -143,6 +148,12 @@ class PaginationHelper {
                 $html .= '<li class="page-item"><a href="' . $this->parseURL($this->pageName, ($this->page + 1)) . '" class="page-link">Next</a></li>';
             } else {
                 $html .= '<li class="page-item disabled"><a href="#" class="page-link">Next</a></li>';
+            }
+
+            if($this->page == round($this->pages)) {
+                $html .= '<li class="page-item disabled"><a href="#" class="page-link">&raquo;</a></li>';
+            } else {
+                $html .= '<li class="page-item"><a href="' . $this->parseURL($this->pageName, round($this->pages)) . '" class="page-link">&raquo;</a></li>';
             }
 
             $html .= '
@@ -195,7 +206,7 @@ class PaginationHelper {
 
     private function getRecordCount() {
 
-        $result = $this->model::offset($offset)->limit($this->limit);
+        $result = $this->model::offset($this->offset)->limit($this->limit);
 
         if (!empty($this->whereOrArray)) {
 
@@ -215,7 +226,13 @@ class PaginationHelper {
             $result->whereIn($this->whereInArray[0], $this->whereInArray[1]);
         }
        
-        return $result->count();
+        if ($this->sort[0] == 'ASC') {
+            return $result->count()->sortBy($this->sort[1]);
+        } else if ($this->sort[0] == 'DESC') {
+            return $result->count()->sortByDesc($this->sort[1]);
+        } else {
+            return $result->count();
+        }
         
     }
 

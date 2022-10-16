@@ -20,7 +20,7 @@ use LMTech\ClientPassword\Helpers\PaginationHelper;
  * @author     Lee Mahoney <lee@leemahoney.dev>
  * @copyright  Copyright (c) Lee Mahoney 2022
  * @license    MIT License
- * @version    1.0.2
+ * @version    1.0.3
  * @link       https://leemahoney.dev
  */
 

@@ -12,7 +12,7 @@ use LMTech\ClientPassword\Config\Config;
  * @author     Lee Mahoney <lee@leemahoney.dev>
  * @copyright  Copyright (c) Lee Mahoney 2022
  * @license    MIT License
- * @version    1.0.2
+ * @version    1.0.3
  * @link       https://leemahoney.dev
  */
 
@@ -43,7 +43,7 @@ function add_clientpassword_buttons($vars) {
                         <div class="modal-content panel panel-primary">
                             <div class="modal-header panel-heading" id="modalChangePwHeader">
                                 <button id="modalChangePwCloseSmall" type="button" class="close" data-dismiss="modal">
-                                    <span aria-hidden="true">×</span>
+                                    <span aria-hidden="true">&times;</span>
                                     <span class="sr-only">Close</span>
                                 </button>
                                 <h4 class="modal-title" id="modalChangePwTitle">Change Password for: <span id="usrName">N/A</span> (<span id="usrEmail">N/A</span>)</h4>
