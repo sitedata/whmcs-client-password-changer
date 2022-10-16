@@ -2,8 +2,8 @@ Psst... If you would like to support my work or are just pure sound, you can [Bu
 
 # WHMCS Client Password Changer
 
-### Version 1.0.2 is now available
-Cleaned up some code and added modal functionality to update passwords without leaving the current page.
+### Version 1.0.3 is now available
+Made some modifications to the pagination helper
 
 ---
 
